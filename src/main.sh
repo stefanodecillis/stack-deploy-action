@@ -65,6 +65,10 @@ echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
 echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
 if [ "${INPUT_WITH_REGISTRY}" = "true" ]; then
     echo -e "\u001b[36mDeploying Stack with Registry Auth."
+    echo "${INPUT_CREDENTIALS_JSON}" > ./gcloud-sa.json"
+    gcloud auth activate-service-account "${INPUT_SERVICE_ACCOUNT}" --key-file=./gcloud-sa.json
+    gcloud auth configure-docker "${INPUT_REGIONS}"
+    echo -e "\u001b[36mAuthenticated."
     docker stack deploy --with-registry-auth -c "${INPUT_FILE}" "${INPUT_NAME}"
 else
     docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}"

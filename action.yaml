@@ -35,6 +35,15 @@ inputs:
   with_registry:
     description: "With Registry"
     required: false
+  regions:
+    description: "Regions"
+    required: false
+  service_account:
+    description: "Service Account Name"
+    required: false
+  credentials_json:
+    description: "Service Account Json"
+    required: false
 
 runs:
   using: "docker"
