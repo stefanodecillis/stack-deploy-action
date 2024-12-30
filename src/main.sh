@@ -63,12 +63,12 @@ fi
 echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
 
 if [ ! -d "$HOME/google-cloud-sdk" ]; then
-    apt update
-    apt install -y lsb-release
-    export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)";
-    echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list;
-    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - ;
-    apt update && apt install google-cloud-sdk;
+    apk add --no-cache curl python3 which bash
+    curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
+    tar -xzf google-cloud-cli-linux-x86_64.tar.gz -C $HOME
+    rm google-cloud-cli-linux-x86_64.tar.gz
+    $HOME/google-cloud-sdk/install.sh --quiet
+    export PATH=$HOME/google-cloud-sdk/bin:$PATH
 fi
 
 echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
