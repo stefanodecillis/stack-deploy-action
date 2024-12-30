@@ -78,7 +78,7 @@ if [ "${INPUT_WITH_REGISTRY}" = "true" ]; then
     gcloud auth activate-service-account "${INPUT_SERVICE_ACCOUNT}" --key-file=./gcloud-sa.json
     gcloud auth configure-docker "${INPUT_REGIONS}"
     echo -e "\u001b[36mAuthenticated."
-    docker stack deploy --with-registry-auth -c "${INPUT_FILE}" "${INPUT_NAME}"
+    docker stack deploy --with-registry-auth --prune -c "${INPUT_FILE}" "${INPUT_NAME}"
 else
     docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}"
 fi
