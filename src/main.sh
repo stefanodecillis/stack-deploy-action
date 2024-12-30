@@ -64,6 +64,7 @@ echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
 
 echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
 if [ "${INPUT_WITH_REGISTRY}" = "true" ]; then
+    echo -e "\u001b[36mDeploying Stack with Registry Auth."
     docker stack deploy --with-registry-auth -c "${INPUT_FILE}" "${INPUT_NAME}"
 else
     docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}"
